@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>swamp マイクラ企画工房</title>
-  <meta name="description" content="Minecraft Java Edition 1.21.4 バニラでそのまま動く、配信・マルチ企画向けデータパックを制作・配布しています。" />
+  <meta name="description" content="Minecraft Java Edition 1.21.4 バニラでそのまま動く、配信・身内マルチ向けデータパックを無料〜500円で配布しています。" />
   <meta property="og:title" content="swamp マイクラ企画工房" />
-  <meta property="og:description" content="Minecraft Java Edition 1.21.4 バニラでそのまま動く、配信・マルチ企画向けデータパックを制作・配布しています。" />
+  <meta property="og:description" content="Minecraft Java Edition 1.21.4 バニラでそのまま動く、配信・身内マルチ向けデータパックを無料〜500円で配布しています。" />
   <meta property="og:type" content="website" />
   <style>
     :root {
@@ -166,7 +166,7 @@
       cursor: default;
     }
 
-    /* Interactive Demo Section */
+    /* Interactive Gaze Hack Demo Section */
     .demo-section {
       padding: 52px 0;
       border-bottom: 1px solid var(--rule);
@@ -196,7 +196,7 @@
       margin: 0;
       font-size: 13.5px;
       color: var(--ink-sub);
-      max-width: 420px;
+      max-width: 440px;
     }
     .demo-layout {
       display: grid;
@@ -207,93 +207,81 @@
     @media (max-width: 860px) {
       .demo-layout { grid-template-columns: 1fr; }
     }
-    .mc-chat-frame {
-      background: #1b1d1c;
-      color: #eaeae6;
-      border: 1px solid #2e312f;
+    .gaze-stage-wrap {
+      background: var(--surface);
+      border: 1px solid var(--rule-strong);
       border-radius: 4px;
       overflow: hidden;
-      font-family: var(--mono);
-      font-size: 13px;
-      line-height: 1.6;
     }
-    .mc-chat-bar {
+    .gaze-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 9px 14px;
-      background: #232624;
-      border-bottom: 1px solid #323634;
-      font-family: var(--sans);
-      font-size: 12px;
-      color: #b7b5ad;
-    }
-    .mc-reset-btn {
-      background: transparent;
-      border: 1px solid #494d4a;
-      color: #d6d4cc;
-      padding: 3px 10px;
-      font-size: 11.5px;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-    .mc-reset-btn:hover { border-color: #9b9990; color: #ffffff; }
-    .mc-chat-log {
-      padding: 14px 16px;
-      min-height: 270px;
-      max-height: 340px;
-      overflow-y: auto;
-      font-variant-numeric: tabular-nums;
-    }
-    .mc-line { margin: 2px 0; white-space: pre-wrap; word-break: break-word; }
-    .mc-hr-aqua { color: #4aa3a2; }
-    .mc-hr-gold { color: #cfa244; }
-    .mc-hr-dim { color: #6f7370; }
-    .mc-muted { color: #a4a7a3; }
-    .mc-gold { color: #f0c259; font-weight: 700; }
-    .mc-aqua { color: #6ad1cf; font-weight: 700; }
-    .mc-green { color: #74c986; font-weight: 700; }
-    .mc-red { color: #e27874; font-weight: 700; }
-    .mc-cmd-btn {
-      display: inline-block;
-      background: #2a2e2c;
-      border: 1px solid #484e4b;
-      color: #f3f1ea;
-      font-family: var(--mono);
-      font-size: 12.5px;
-      font-weight: 700;
-      padding: 2px 8px;
-      margin: 2px 6px 2px 0;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-    .mc-cmd-btn:hover { background: #373d3a; border-color: #7c8480; }
-    .mc-cmd-btn.b-aqua { color: #7ce2df; }
-    .mc-cmd-btn.b-gold { color: #f6cd6d; }
-    .mc-cmd-btn.b-green { color: #84d996; }
-    .mc-cmd-btn.b-red { color: #ef8a86; }
-    .mc-chat-input-bar {
-      display: flex;
-      align-items: center;
       gap: 10px;
-      padding: 9px 14px;
-      background: #141615;
-      border-top: 1px solid #2e312f;
+      flex-wrap: wrap;
+      padding: 10px 14px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+    }
+    .gaze-mode-group {
+      display: flex;
+      gap: 6px;
       flex-wrap: wrap;
     }
-    .mc-prompt { color: #8b8f8b; }
-    .mc-cmd-hint { font-family: var(--sans); font-size: 12px; color: #9c9e98; flex: 1; }
-    .mc-open-btn {
-      background: #2b302d;
-      color: #f4f2ec;
-      border: 1px solid #4e5551;
-      font-family: var(--mono);
-      font-size: 12px;
-      padding: 4px 10px;
+    .gaze-mode-btn {
+      background: var(--surface);
+      color: var(--ink-sub);
+      border: 1px solid var(--rule-strong);
       border-radius: 3px;
+      padding: 5px 11px;
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 600;
       cursor: pointer;
     }
-    .mc-open-btn:hover { background: #3b423e; }
+    .gaze-mode-btn.active {
+      background: var(--ink);
+      color: #ffffff;
+      border-color: var(--ink);
+    }
+    .gaze-reset-btn {
+      background: transparent;
+      color: var(--ink-sub);
+      border: 1px solid var(--rule-strong);
+      border-radius: 3px;
+      padding: 4px 10px;
+      font-family: inherit;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .gaze-reset-btn:hover { color: var(--ink); border-color: var(--ink); }
+    #gazeCanvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #fbfaf7;
+      cursor: crosshair;
+      touch-action: none;
+    }
+    .gaze-status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 9px 14px;
+      background: var(--paper);
+      border-top: 1px solid var(--rule);
+      font-size: 12.5px;
+      color: var(--ink-sub);
+    }
+    .gaze-stat-mono {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+    }
 
     .demo-notes h3 {
       margin: 0 0 12px;
@@ -436,26 +424,29 @@
     }
     .feature-list li { margin-bottom: 4px; }
 
-    .price-table {
+    .price-row {
       margin-top: auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      flex-wrap: wrap;
+      padding: 12px 14px;
+      background: var(--paper);
       border: 1px solid var(--rule);
       border-radius: 4px;
-      overflow: hidden;
       font-variant-numeric: tabular-nums;
     }
-    .price-cell {
-      padding: 10px 8px;
-      text-align: center;
-      border-right: 1px solid var(--rule);
-      background: var(--paper);
+    .price-num {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.01em;
     }
-    .price-cell:last-child { border-right: none; }
-    .price-standard { background: var(--surface); }
-    .tier-label { display: block; font-size: 11px; color: var(--ink-faint); }
-    .tier-val { display: block; font-size: 16px; font-weight: 700; color: var(--ink); margin: 2px 0; }
-    .tier-note { display: block; font-size: 11px; color: var(--ink-sub); }
+    .price-free { color: var(--ok); }
+    .price-caption {
+      font-size: 12px;
+      color: var(--ink-sub);
+    }
 
     .entry-meta {
       display: flex;
@@ -616,7 +607,7 @@
     <div class="wrap site-nav-inner">
       <a href="#top" class="brand">swamp マイクラ企画工房<span class="brand-owner">by swamp</span></a>
       <div class="nav-links">
-        <a href="#demo">お試しデモ</a>
+        <a href="#demo">視線ハック体験</a>
         <a href="#catalog">商品一覧</a>
         <a href="#guide">導入方法</a>
         <a href="#license">利用規約</a>
@@ -629,15 +620,16 @@
     <header class="hero">
       <p class="hero-kicker">MINECRAFT JAVA EDITION 1.21.4 DATAPACK CATALOG</p>
       <h1>バニラのマイクラに、<br />もう一段面白い企画を。</h1>
-      <p class="hero-lead">Minecraft Java Edition 1.21.4 バニラでそのまま動く、配信・マルチ企画向けデータパックを制作・配布しています。</p>
+      <p class="hero-lead">Minecraft Java Edition 1.21.4 バニラでそのまま動く、配信・身内マルチ向けデータパックを無料〜500円で配布しています。</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#catalog">商品一覧を見る（全10種）</a>
-        <a class="btn btn-secondary" href="#demo">ブラウザでチャットOSを試す</a>
+        <a class="btn btn-primary" href="#catalog">商品一覧を見る（無料〜¥500）</a>
+        <a class="btn btn-secondary" href="#demo">視線ハックをブラウザで試す</a>
       </div>
       <div class="fact-strip">
+        <span>価格帯：<strong>無料（¥0）〜 ワンコイン ¥500</strong></span>
         <span>対応環境：<strong>Minecraft Java Edition 1.21.4（MOD不要）</strong></span>
         <span>静的検査：<strong>10 / 10 パッケージ検証済み（エラー0）</strong></span>
-        <span>利用範囲：<strong>個人・収益化配信・動画投稿OK</strong></span>
+        <span>利用範囲：<strong>収益化配信・動画投稿OK</strong></span>
       </div>
     </header>
 
@@ -645,39 +637,41 @@
     <section class="demo-section" id="demo" aria-labelledby="demoHeading">
       <div class="section-head">
         <div>
-          <p class="section-kicker">購入前お試しプレビュー</p>
-          <h2 id="demoHeading">主力パック「マイクラ内OSハック」をブラウザで触ってみる</h2>
+          <p class="section-kicker">看板ギミック・購入前体験</p>
+          <h2 id="demoHeading">『視線ハック・ギミック（Gaze Hack）』の動きを触って試す</h2>
         </div>
-        <p class="section-lead">実物データパック（<code>ingame-os-mc_v1.0.zip</code>）のチャットクリックUIを、コマンド挙動そのままにブラウザへ再現しています。</p>
+        <p class="section-lead">フィールド上でカーソル（または指）を動かして視線を向けてみてください。実物データパックの2モードをそのまま体験できます。</p>
       </div>
 
       <div class="demo-layout">
-        <div class="mc-chat-frame" aria-label="マイクラ内チャットUIの再現デモ">
-          <div class="mc-chat-bar">
-            <span>Minecraft Java 1.21.4 チャット欄プレビュー</span>
-            <button type="button" class="mc-reset-btn" id="demoResetBtn">初期化</button>
+        <div class="gaze-stage-wrap">
+          <div class="gaze-bar">
+            <div class="gaze-mode-group" role="tablist" aria-label="視線ハックモード切替">
+              <button type="button" class="gaze-mode-btn active" data-gaze-mode="weeping">モード1: 見つめると硬直</button>
+              <button type="button" class="gaze-mode-btn" data-gaze-mode="swap">モード2: 目が合うと位置入替</button>
+            </div>
+            <button type="button" class="gaze-reset-btn" id="gazeResetBtn">位置リセット</button>
           </div>
-          <div class="mc-chat-log" id="mcChatLog" role="log" aria-live="polite"></div>
-          <div class="mc-chat-input-bar">
-            <span class="mc-prompt">&gt;</span>
-            <span class="mc-cmd-hint">チャット内の [ボタン] をクリックして操作できます</span>
-            <button type="button" class="mc-open-btn" id="demoOpenOsBtn">/function ingame_os:menu</button>
+          <canvas id="gazeCanvas" width="600" height="320" aria-label="視線ハック・レイキャスト体験フィールド"></canvas>
+          <div class="gaze-status-bar">
+            <span id="gazeStatusText">クリーパーに視線を合わせると硬直します。目を逸らすと迫ってきます。</span>
+            <span class="gaze-stat-mono" id="gazeStatMono">状態: 監視中</span>
           </div>
         </div>
 
         <aside class="demo-notes">
-          <h3>実物データパックでできること</h3>
+          <h3>実物データパックの仕組み</h3>
           <ol class="plain-steps">
-            <li>ワールドの <code>datapacks</code> フォルダへ同梱ZIPを入れ、チャットで <code>/reload</code> を実行。</li>
-            <li><code>/function ingame_os:menu</code> または権限不要の <code>/trigger os_menu</code> でチャットOSを起動。</li>
-            <li>スコアボードでプレイヤー別に所持金・保有株数を保持するため、マルチプレイ企画でもそのまま使えます。</li>
+            <li>バニラ 1.21.4 の <code>mcfunction</code> のみで 0.8ブロック刻み・最大40ステップの視線レイキャストを実行（壁や遮蔽物を貫通しません）。</li>
+            <li><code>/function gaze_hack:mode/weeping</code> でウィーピング・エンジェル、<code>/function gaze_hack:mode/swap</code> で相互視線スワップへ即切替。</li>
+            <li><code>/function gaze_hack:setup/summon_weeping_creeper</code> で専用クリーパーを召喚でき、ホラー縛りや身内鬼ごっこにすぐ投入できます。</li>
           </ol>
           <dl class="spec-dl">
+            <div><dt>価格</dt><dd>¥300（買い切り・配信利用可）</dd></div>
             <div><dt>対応環境</dt><dd>Minecraft Java Edition 1.21.4（MOD不要）</dd></div>
-            <div><dt>収録規模</dt><dd>20 mcfunctions / 静的検査エラー 0</dd></div>
-            <div><dt>想定価格</dt><dd>梅 ¥500 / 竹 ¥980 / 松 ¥1,980</dd></div>
+            <div><dt>収録規模</dt><dd>18 mcfunctions / 静的検査エラー 0</dd></div>
           </dl>
-          <a class="inline-jump" href="#ingame-os-mc">カタログ詳細を見る →</a>
+          <a class="inline-jump" href="#gaze-hack-mc">視線ハックの詳細を見る →</a>
         </aside>
       </div>
     </section>
@@ -689,77 +683,21 @@
           <p class="section-kicker">収録ラインナップ</p>
           <h2 id="catalogHeading">データパック一覧</h2>
         </div>
-        <p class="section-lead">すべてのパッケージに日本語・英語の導入マニュアルと商用配信ライセンスを同梱しています。</p>
+        <p class="section-lead">全品、複雑なプラン分けなしの1価格（収益化配信ライセンス込み）で配布しています。無料枠から気軽にお試しください。</p>
       </div>
 
       <div class="toolbar">
         <div class="filter-tabs" id="categoryFilters" role="tablist" aria-label="カテゴリ絞り込み">
-          <button type="button" class="filter-tab active" data-category="all">すべて (10)</button><button type="button" class="filter-tab" data-category="配信ギミック・ミニゲーム">配信ギミック・ミニゲーム (1)</button><button type="button" class="filter-tab" data-category="ホラー・心理戦">ホラー・心理戦 (1)</button><button type="button" class="filter-tab" data-category="全9種セット">全9種セット (1)</button><button type="button" class="filter-tab" data-category="PvP・撮れ高演出">PvP・撮れ高演出 (1)</button><button type="button" class="filter-tab" data-category="パーティー・人狼">パーティー・人狼 (1)</button><button type="button" class="filter-tab" data-category="リプレイ・タイムアタック">リプレイ・タイムアタック (1)</button><button type="button" class="filter-tab" data-category="建築・地形生成">建築・地形生成 (1)</button><button type="button" class="filter-tab" data-category="映像・MV演出">映像・MV演出 (1)</button><button type="button" class="filter-tab" data-category="視聴者コメント連動">視聴者コメント連動 (1)</button><button type="button" class="filter-tab" data-category="声量連動・リアクション">声量連動・リアクション (1)</button>
+          <button type="button" class="filter-tab active" data-category="all">すべて (10)</button><button type="button" class="filter-tab" data-category="__free__">無料お試し (3)</button><button type="button" class="filter-tab" data-category="ホラー・心理戦">ホラー・心理戦 (1)</button><button type="button" class="filter-tab" data-category="パーティー・人狼">パーティー・人狼 (1)</button><button type="button" class="filter-tab" data-category="リプレイ・タイムアタック">リプレイ・タイムアタック (1)</button><button type="button" class="filter-tab" data-category="全9種まとめ">全9種まとめ (1)</button><button type="button" class="filter-tab" data-category="声量連動・リアクション">声量連動・リアクション (1)</button><button type="button" class="filter-tab" data-category="PvP・撮れ高演出">PvP・撮れ高演出 (1)</button><button type="button" class="filter-tab" data-category="視聴者コメント連動">視聴者コメント連動 (1)</button><button type="button" class="filter-tab" data-category="建築・地形生成">建築・地形生成 (1)</button><button type="button" class="filter-tab" data-category="映像・MV演出">映像・MV演出 (1)</button><button type="button" class="filter-tab" data-category="ミニゲーム・実験作">ミニゲーム・実験作 (1)</button>
         </div>
         <input type="search" id="searchInput" class="search-input" placeholder="商品名・キーワードで絞り込み" aria-label="商品を検索" />
       </div>
 
       <main class="catalog-grid" id="productGrid">
         
-        <article class="product-entry" id="ingame-os-mc" data-category="配信ギミック・ミニゲーム" data-accent="#38bdf8" data-search="マイクラ内osハック（株・カジノ・ミニゲームui） in-game os hack (stocks, casino &amp; mini-games ui) チャット欄がデスクトップosに！株価・スロット・ルーレットをマイクラ内で完結 配信ギミック・ミニゲーム ingame-os-mc">
+        <article class="product-entry" id="gaze-hack-mc" data-category="ホラー・心理戦" data-free="0" data-accent="#a855f7" data-search="視線ハック・ギミック（gaze hack） gaze hack (weeping angel &amp; gaze swap mechanics) 『見ている間だけ動けない』『視線が合うと位置が入れ替わる』ホラー＆心理戦ギミック ホラー・心理戦 gaze-hack-mc">
           <div class="entry-head">
             <span class="entry-index">01</span>
-            <span class="entry-cat">配信ギミック・ミニゲーム</span>
-            <span class="entry-ver">MC 1.21.4 · v1.0</span>
-          </div>
-          <h3 class="entry-title">マイクラ内OSハック（株・カジノ・ミニゲームUI）</h3>
-          <p class="entry-subtitle">In-Game OS Hack (Stocks, Casino &amp; Mini-Games UI)</p>
-          <p class="entry-desc">チャット欄がデスクトップOSに！株価・スロット・ルーレットをマイクラ内で完結</p>
-          <ul class="feature-list"><li>チャットクリックUIで動作する仮想OSデスクトップメニュー</li><li>リアルタイム変動する仮想株価マーケット＆売買システム</li><li>演出付きスロット＆ハイローカジノミニゲーム</li><li>バニラ1.21.4完全対応（MOD不要・データパック単体動作）</li></ul>
-
-          <div class="price-table" role="group" aria-label="価格プラン">
-            <div class="price-cell">
-              <span class="tier-label">梅 Lite</span>
-              <span class="tier-val">¥500</span>
-              <span class="tier-note">本体＋説明書</span>
-            </div>
-            <div class="price-cell price-standard">
-              <span class="tier-label">竹 Standard</span>
-              <span class="tier-val">¥980</span>
-              <span class="tier-note">収益化配信可</span>
-            </div>
-            <div class="price-cell">
-              <span class="tier-label">松 Pro</span>
-              <span class="tier-val">¥1,980</span>
-              <span class="tier-note">大型コラボ向け</span>
-            </div>
-          </div>
-
-          <div class="entry-meta">
-            <span class="meta-qa"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.2 8.4l3 3.1 6.6-6.8"/></svg> QA Passed (errors=0, mcfunctions=20)</span>
-            <div class="file-spec"><code>ingame-os-mc_v1.0.zip</code> / 15.3 KB / SHA256: <code>506a5a9975</code></div>
-          </div>
-
-          <div class="entry-actions">
-            <span class="btn btn-muted" aria-disabled="true">BOOTH 出品準備中</span>
-          </div>
-
-          <details class="entry-details">
-            <summary>収録コマンド・概要欄テンプレートを見る</summary>
-            <div class="details-body">
-              
-            <div class="spec-sub">
-              <div class="spec-sub-title">同梱ファンクション（一部）</div>
-              <ul class="cmd-list"><li><code>/function ingame_os:daily_bonus</code></li><li><code>/function ingame_os:init_player</code></li><li><code>/function ingame_os:load</code></li><li><code>/function ingame_os:menu</code></li><li><code>/function ingame_os:open_os</code></li><li><code>/function ingame_os:slot/execute_spin</code></li><li><code>/function ingame_os:slot/judge</code></li><li><code>/function ingame_os:slot/open</code></li></ul>
-            </div>
-              <div class="spec-sub">
-                <div class="spec-sub-title">動画・配信の概要欄テンプレート</div>
-                <pre class="cta-pre" id="cta-ingame-os-mc">▼ 動画で使用したデータパック『マイクラ内OSハック（株・カジノ・ミニゲームUI）』
-配布ページ: https://abscly.github.io/swamp-mc-store/#ingame-os-mc
-※ Minecraft Java Edition 1.21.4 バニラ対応・収益化配信/動画利用可</pre>
-                <button type="button" class="btn-text-copy" data-copy-target="cta-ingame-os-mc"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1"/><path d="M3 10.5V3.8A.8.8 0 0 1 3.8 3h6.7"/></svg> テキストをコピー</button>
-              </div>
-            </div>
-          </details>
-        </article>
-        <article class="product-entry" id="gaze-hack-mc" data-category="ホラー・心理戦" data-accent="#a855f7" data-search="視線ハック・ギミック（gaze hack） gaze hack (weeping angel &amp; gaze swap mechanics) 『見ている間だけ動けない』『視線が合うと位置が入れ替わる』ホラー＆心理戦ギミック ホラー・心理戦 gaze-hack-mc">
-          <div class="entry-head">
-            <span class="entry-index">02</span>
             <span class="entry-cat">ホラー・心理戦</span>
             <span class="entry-ver">MC 1.21.4 · v1.0</span>
           </div>
@@ -768,27 +706,14 @@
           <p class="entry-desc">『見ている間だけ動けない』『視線が合うと位置が入れ替わる』ホラー＆心理戦ギミック</p>
           <ul class="feature-list"><li>視線レイキャスト判定による高精度な『視線検知』エンジン</li><li>モード1: 見つめている間だけ対象が硬直するウィーピング・エンジェル</li><li>モード2: 視線が交差すると位置が入れ替わるテレポートスワップ</li><li>クールダウン調整＆パーティー・ホラー企画向け設計</li></ul>
 
-          <div class="price-table" role="group" aria-label="価格プラン">
-            <div class="price-cell">
-              <span class="tier-label">梅 Lite</span>
-              <span class="tier-val">¥500</span>
-              <span class="tier-note">本体＋説明書</span>
-            </div>
-            <div class="price-cell price-standard">
-              <span class="tier-label">竹 Standard</span>
-              <span class="tier-val">¥980</span>
-              <span class="tier-note">収益化配信可</span>
-            </div>
-            <div class="price-cell">
-              <span class="tier-label">松 Pro</span>
-              <span class="tier-val">¥1,800</span>
-              <span class="tier-note">大型コラボ向け</span>
-            </div>
+          <div class="price-row">
+            <span class="price-num">¥300</span>
+            <span class="price-caption">買い切り・収益化配信および動画利用可</span>
           </div>
 
           <div class="entry-meta">
             <span class="meta-qa"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.2 8.4l3 3.1 6.6-6.8"/></svg> QA Passed (errors=0, mcfunctions=18)</span>
-            <div class="file-spec"><code>gaze-hack-mc_v1.0.zip</code> / 11.3 KB / SHA256: <code>c4349ee7bf</code></div>
+            <div class="file-spec"><code>gaze-hack-mc_v1.0.zip</code> / 11.0 KB / SHA256: <code>48b7eff056</code></div>
           </div>
 
           <div class="entry-actions">
@@ -805,7 +730,7 @@
             </div>
               <div class="spec-sub">
                 <div class="spec-sub-title">動画・配信の概要欄テンプレート</div>
-                <pre class="cta-pre" id="cta-gaze-hack-mc">▼ 動画で使用したデータパック『視線ハック・ギミック（Gaze Hack）』
+                <pre class="cta-pre" id="cta-gaze-hack-mc">▼ 動画で使用したデータパック『視線ハック・ギミック（Gaze Hack）』(¥300)
 配布ページ: https://abscly.github.io/swamp-mc-store/#gaze-hack-mc
 ※ Minecraft Java Edition 1.21.4 バニラ対応・収益化配信/動画利用可</pre>
                 <button type="button" class="btn-text-copy" data-copy-target="cta-gaze-hack-mc"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1"/><path d="M3 10.5V3.8A.8.8 0 0 1 3.8 3h6.7"/></svg> テキストをコピー</button>
@@ -813,117 +738,9 @@
             </div>
           </details>
         </article>
-        <article class="product-entry" id="mega-bundle-9in1" data-category="全9種セット" data-accent="#1f513f" data-search="マイクラ企画 9種コンプリートセット complete 9-in-1 creator datapack collection 単品データパック全9種（計453ファンクション）＋総合企画ガイド＋商用配信ライセンスをまとめたお得セット。 全9種セット mega-bundle-9in1">
+        <article class="product-entry" id="werewolf-inflation-mc" data-category="パーティー・人狼" data-free="0" data-accent="#ef4444" data-search="人狼インフレーション（werewolf inflation） werewolf inflation (escalating chaos roleplay pack) 時間が経つほど能力も報酬もバフもインフレしていく超加速人狼データパック パーティー・人狼 werewolf-inflation-mc">
           <div class="entry-head">
-            <span class="entry-index">03</span>
-            <span class="entry-cat">全9種セット</span>
-            <span class="entry-ver">MC 1.21.4 · v1.0</span>
-          </div>
-          <h3 class="entry-title">マイクラ企画 9種コンプリートセット</h3>
-          <p class="entry-subtitle">Complete 9-in-1 Creator Datapack Collection</p>
-          <p class="entry-desc">単品データパック全9種（計453ファンクション）＋総合企画ガイド＋商用配信ライセンスをまとめたお得セット。</p>
-          <ul class="feature-list"><li>全9種の即導入用データパックZIPをひとまとめに収録</li><li>合計 453 個のファンクションすべて静的検査（エラー0）済み</li><li>配信企画の組み合わせレシピ付き総合導入マニュアル（日英）</li><li>単品竹プラン合計（¥9,300相当）から大幅割引</li></ul>
-
-          <div class="price-table" role="group" aria-label="価格プラン">
-            <div class="price-cell">
-              <span class="tier-label">梅 Lite</span>
-              <span class="tier-val">¥2,980</span>
-              <span class="tier-note">本体＋説明書</span>
-            </div>
-            <div class="price-cell price-standard">
-              <span class="tier-label">竹 Standard</span>
-              <span class="tier-val">¥4,980</span>
-              <span class="tier-note">収益化配信可</span>
-            </div>
-            <div class="price-cell">
-              <span class="tier-label">松 Pro</span>
-              <span class="tier-val">¥8,800</span>
-              <span class="tier-note">大型コラボ向け</span>
-            </div>
-          </div>
-
-          <div class="entry-meta">
-            <span class="meta-qa"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.2 8.4l3 3.1 6.6-6.8"/></svg> QA Passed (errors=0, mcfunctions=453)</span>
-            <div class="file-spec"><code>mega-bundle-9in1_v1.0.zip</code> / 257.7 KB / SHA256: <code>68c64f745f</code></div>
-          </div>
-
-          <div class="entry-actions">
-            <span class="btn btn-muted" aria-disabled="true">BOOTH 出品準備中</span>
-          </div>
-
-          <details class="entry-details">
-            <summary>収録コマンド・概要欄テンプレートを見る</summary>
-            <div class="details-body">
-              
-              <div class="spec-sub">
-                <div class="spec-sub-title">動画・配信の概要欄テンプレート</div>
-                <pre class="cta-pre" id="cta-mega-bundle-9in1">▼ 動画で使用したデータパック『マイクラ企画 9種コンプリートセット』
-配布ページ: https://abscly.github.io/swamp-mc-store/#mega-bundle-9in1
-※ Minecraft Java Edition 1.21.4 バニラ対応・収益化配信/動画利用可</pre>
-                <button type="button" class="btn-text-copy" data-copy-target="cta-mega-bundle-9in1"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1"/><path d="M3 10.5V3.8A.8.8 0 0 1 3.8 3h6.7"/></svg> テキストをコピー</button>
-              </div>
-            </div>
-          </details>
-        </article>
-        <article class="product-entry" id="miracle-director-mc" data-category="PvP・撮れ高演出" data-accent="#f59e0b" data-search="奇跡演出aiディレクター（miracle director） miracle director (dynamic dramatic pacing engine) 勝敗をギリギリまで接戦に導き、最高の撮れ高を自動演出するドラマ生成データパック pvp・撮れ高演出 miracle-director-mc">
-          <div class="entry-head">
-            <span class="entry-index">04</span>
-            <span class="entry-cat">PvP・撮れ高演出</span>
-            <span class="entry-ver">MC 1.21.4 · v1.0</span>
-          </div>
-          <h3 class="entry-title">奇跡演出AIディレクター（Miracle Director）</h3>
-          <p class="entry-subtitle">Miracle Director (Dynamic Dramatic Pacing Engine)</p>
-          <p class="entry-desc">勝敗をギリギリまで接戦に導き、最高の撮れ高を自動演出するドラマ生成データパック</p>
-          <ul class="feature-list"><li>スコア差を検知して劣勢側に逆転バフ・奇跡イベントを自動発動</li><li>接戦時は緊張感を高めるサウンド＆タイトル演出を自動トリガー</li><li>配信者・動画勢の『撮れ高不足』を解消する自動ドラマ構成</li><li>Minecraft 1.21.4 パックフォーマット61完全準拠</li></ul>
-
-          <div class="price-table" role="group" aria-label="価格プラン">
-            <div class="price-cell">
-              <span class="tier-label">梅 Lite</span>
-              <span class="tier-val">¥600</span>
-              <span class="tier-note">本体＋説明書</span>
-            </div>
-            <div class="price-cell price-standard">
-              <span class="tier-label">竹 Standard</span>
-              <span class="tier-val">¥1,200</span>
-              <span class="tier-note">収益化配信可</span>
-            </div>
-            <div class="price-cell">
-              <span class="tier-label">松 Pro</span>
-              <span class="tier-val">¥2,400</span>
-              <span class="tier-note">大型コラボ向け</span>
-            </div>
-          </div>
-
-          <div class="entry-meta">
-            <span class="meta-qa"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.2 8.4l3 3.1 6.6-6.8"/></svg> QA Passed (errors=0, mcfunctions=7)</span>
-            <div class="file-spec"><code>miracle-director-mc_v1.0.zip</code> / 9.5 KB / SHA256: <code>dd464c3418</code></div>
-          </div>
-
-          <div class="entry-actions">
-            <span class="btn btn-muted" aria-disabled="true">BOOTH 出品準備中</span>
-          </div>
-
-          <details class="entry-details">
-            <summary>収録コマンド・概要欄テンプレートを見る</summary>
-            <div class="details-body">
-              
-            <div class="spec-sub">
-              <div class="spec-sub-title">同梱ファンクション（一部）</div>
-              <ul class="cmd-list"><li><code>/function miracle_director:evaluate</code></li><li><code>/function miracle_director:load</code></li><li><code>/function miracle_director:reset</code></li><li><code>/function miracle_director:tick</code></li><li><code>/function miracle_director:trigger_climax</code></li><li><code>/function miracle_director:trigger_high</code></li><li><code>/function miracle_director:trigger_mild</code></li></ul>
-            </div>
-              <div class="spec-sub">
-                <div class="spec-sub-title">動画・配信の概要欄テンプレート</div>
-                <pre class="cta-pre" id="cta-miracle-director-mc">▼ 動画で使用したデータパック『奇跡演出AIディレクター（Miracle Director）』
-配布ページ: https://abscly.github.io/swamp-mc-store/#miracle-director-mc
-※ Minecraft Java Edition 1.21.4 バニラ対応・収益化配信/動画利用可</pre>
-                <button type="button" class="btn-text-copy" data-copy-target="cta-miracle-director-mc"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1"/><path d="M3 10.5V3.8A.8.8 0 0 1 3.8 3h6.7"/></svg> テキストをコピー</button>
-              </div>
-            </div>
-          </details>
-        </article>
-        <article class="product-entry" id="werewolf-inflation-mc" data-category="パーティー・人狼" data-accent="#ef4444" data-search="人狼インフレーション（werewolf inflation） werewolf inflation (escalating chaos roleplay pack) 時間が経つほど能力も報酬もバフもインフレしていく超加速人狼データパック パーティー・人狼 werewolf-inflation-mc">
-          <div class="entry-head">
-            <span class="entry-index">05</span>
+            <span class="entry-index">02</span>
             <span class="entry-cat">パーティー・人狼</span>
             <span class="entry-ver">MC 1.21.4 · v1.0</span>
           </div>
@@ -932,27 +749,14 @@
           <p class="entry-desc">時間が経つほど能力も報酬もバフもインフレしていく超加速人狼データパック</p>
           <ul class="feature-list"><li>フェーズ進行に応じて倍率・ステータスが跳ね上がるインフレ設計</li><li>人狼・村人双方にスリリングな逆転要素を提供するイベント群</li><li>コラボ配信・大人数マルチ企画で盛り上がる自動進行補助</li><li>Minecraft 1.21.4 完全対応</li></ul>
 
-          <div class="price-table" role="group" aria-label="価格プラン">
-            <div class="price-cell">
-              <span class="tier-label">梅 Lite</span>
-              <span class="tier-val">¥600</span>
-              <span class="tier-note">本体＋説明書</span>
-            </div>
-            <div class="price-cell price-standard">
-              <span class="tier-label">竹 Standard</span>
-              <span class="tier-val">¥1,200</span>
-              <span class="tier-note">収益化配信可</span>
-            </div>
-            <div class="price-cell">
-              <span class="tier-label">松 Pro</span>
-              <span class="tier-val">¥2,400</span>
-              <span class="tier-note">大型コラボ向け</span>
-            </div>
+          <div class="price-row">
+            <span class="price-num">¥300</span>
+            <span class="price-caption">買い切り・収益化配信および動画利用可</span>
           </div>
 
           <div class="entry-meta">
             <span class="meta-qa"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.2 8.4l3 3.1 6.6-6.8"/></svg> QA Passed (errors=0, mcfunctions=16)</span>
-            <div class="file-spec"><code>werewolf-inflation-mc_v1.0.zip</code> / 14.1 KB / SHA256: <code>dc5fdbe7a3</code></div>
+            <div class="file-spec"><code>werewolf-inflation-mc_v1.0.zip</code> / 13.8 KB / SHA256: <code>9523573e33</code></div>
           </div>
 
           <div class="entry-actions">
@@ -969,7 +773,7 @@
             </div>
               <div class="spec-sub">
                 <div class="spec-sub-title">動画・配信の概要欄テンプレート</div>
-                <pre class="cta-pre" id="cta-werewolf-inflation-mc">▼ 動画で使用したデータパック『人狼インフレーション（Werewolf Inflation）』
+                <pre class="cta-pre" id="cta-werewolf-inflation-mc">▼ 動画で使用したデータパック『人狼インフレーション（Werewolf Inflation）』(¥300)
 配布ページ: https://abscly.github.io/swamp-mc-store/#werewolf-inflation-mc
 ※ Minecraft Java Edition 1.21.4 バニラ対応・収益化配信/動画利用可</pre>
                 <button type="button" class="btn-text-copy" data-copy-target="cta-werewolf-inflation-mc"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1"/><path d="M3 10.5V3.8A.8.8 0 0 1 3.8 3h6.7"/></svg> テキストをコピー</button>
@@ -977,9 +781,9 @@
             </div>
           </details>
         </article>
-        <article class="product-entry" id="doppelganger-mc" data-category="リプレイ・タイムアタック" data-accent="#ec4899" data-search="aiドッペルゲンガー対決（doppelganger ghost） doppelganger ghost (frame-by-frame shadow replay) 過去の自分の動きを完全再現する『分身ゴースト』とタイムアタック＆対決！ リプレイ・タイムアタック doppelganger-mc">
+        <article class="product-entry" id="doppelganger-mc" data-category="リプレイ・タイムアタック" data-free="0" data-accent="#ec4899" data-search="aiドッペルゲンガー対決（doppelganger ghost） doppelganger ghost (frame-by-frame shadow replay) 過去の自分の動きを完全再現する『分身ゴースト』とタイムアタック＆対決！ リプレイ・タイムアタック doppelganger-mc">
           <div class="entry-head">
-            <span class="entry-index">06</span>
+            <span class="entry-index">03</span>
             <span class="entry-cat">リプレイ・タイムアタック</span>
             <span class="entry-ver">MC 1.21.4 · v1.0</span>
           </div>
@@ -988,27 +792,14 @@
           <p class="entry-desc">過去の自分の動きを完全再現する『分身ゴースト』とタイムアタック＆対決！</p>
           <ul class="feature-list"><li>二分木ディスパッチによる高速・軽量なフレーム再生エンジン</li><li>過去のプレイログから座標・視線・イベントを忠実に再生</li><li>パーティクル＆スコア表示による白熱のゴーストバトル演出</li><li>Minecraft 1.21.4 バニラ動作対応</li></ul>
 
-          <div class="price-table" role="group" aria-label="価格プラン">
-            <div class="price-cell">
-              <span class="tier-label">梅 Lite</span>
-              <span class="tier-val">¥500</span>
-              <span class="tier-note">本体＋説明書</span>
-            </div>
-            <div class="price-cell price-standard">
-              <span class="tier-label">竹 Standard</span>
-              <span class="tier-val">¥1,000</span>
-              <span class="tier-note">収益化配信可</span>
-            </div>
-            <div class="price-cell">
-              <span class="tier-label">松 Pro</span>
-              <span class="tier-val">¥2,000</span>
-              <span class="tier-note">大型コラボ向け</span>
-            </div>
+          <div class="price-row">
+            <span class="price-num">¥300</span>
+            <span class="price-caption">買い切り・収益化配信および動画利用可</span>
           </div>
 
           <div class="entry-meta">
             <span class="meta-qa"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.2 8.4l3 3.1 6.6-6.8"/></svg> QA Passed (errors=0, mcfunctions=334)</span>
-            <div class="file-spec"><code>doppelganger-mc_v1.0.zip</code> / 58.1 KB / SHA256: <code>cf9ea041da</code></div>
+            <div class="file-spec"><code>doppelganger-mc_v1.0.zip</code> / 57.7 KB / SHA256: <code>6bc269f218</code></div>
           </div>
 
           <div class="entry-actions">
@@ -1025,7 +816,7 @@
             </div>
               <div class="spec-sub">
                 <div class="spec-sub-title">動画・配信の概要欄テンプレート</div>
-                <pre class="cta-pre" id="cta-doppelganger-mc">▼ 動画で使用したデータパック『AIドッペルゲンガー対決（Doppelganger Ghost）』
+                <pre class="cta-pre" id="cta-doppelganger-mc">▼ 動画で使用したデータパック『AIドッペルゲンガー対決（Doppelganger Ghost）』(¥300)
 配布ページ: https://abscly.github.io/swamp-mc-store/#doppelganger-mc
 ※ Minecraft Java Edition 1.21.4 バニラ対応・収益化配信/動画利用可</pre>
                 <button type="button" class="btn-text-copy" data-copy-target="cta-doppelganger-mc"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1"/><path d="M3 10.5V3.8A.8.8 0 0 1 3.8 3h6.7"/></svg> テキストをコピー</button>
@@ -1033,38 +824,25 @@
             </div>
           </details>
         </article>
-        <article class="product-entry" id="earth-terrain-mc" data-category="建築・地形生成" data-accent="#10b981" data-search="地球実測地形ジェネレーター（earth terrain mc） earth terrain mc (real-world heightmap builder) 富士山などの実測dem標高データをワンコマンドでマイクラ世界に建築！ 建築・地形生成 earth-terrain-mc">
+        <article class="product-entry" id="mega-bundle-9in1" data-category="全9種まとめ" data-free="0" data-accent="#1f513f" data-search="マイクラ企画 9種コンプリートセット complete 9-in-1 creator datapack collection 全9種のデータパック（計453ファンクション）＋総合企画ガイド＋収益化配信ライセンスをワンコインでひとまとめに収録。 全9種まとめ mega-bundle-9in1">
           <div class="entry-head">
-            <span class="entry-index">07</span>
-            <span class="entry-cat">建築・地形生成</span>
+            <span class="entry-index">04</span>
+            <span class="entry-cat">全9種まとめ</span>
             <span class="entry-ver">MC 1.21.4 · v1.0</span>
           </div>
-          <h3 class="entry-title">地球実測地形ジェネレーター（Earth Terrain MC）</h3>
-          <p class="entry-subtitle">Earth Terrain MC (Real-World Heightmap Builder)</p>
-          <p class="entry-desc">富士山などの実測DEM標高データをワンコマンドでマイクラ世界に建築！</p>
-          <ul class="feature-list"><li>標高に応じた自動バイオーム・ブロック配色（雪冠・岩肌・森林・水面）</li><li>`fill` コマンド最適化による高速地形生成</li><li>標準プリセット（富士山モデル）を即座に生成可能</li><li>建築勢・マップ制作者の時短に最適な 1.21.4 データパック</li></ul>
+          <h3 class="entry-title">マイクラ企画 9種コンプリートセット</h3>
+          <p class="entry-subtitle">Complete 9-in-1 Creator Datapack Collection</p>
+          <p class="entry-desc">全9種のデータパック（計453ファンクション）＋総合企画ガイド＋収益化配信ライセンスをワンコインでひとまとめに収録。</p>
+          <ul class="feature-list"><li>全9種の即導入用データパックZIPをひとまとめに収録</li><li>合計 453 個のファンクションすべて静的検査（エラー0）済み</li><li>配信企画の組み合わせレシピ付き総合導入マニュアル（日英）</li><li>有料単品6種合計 ¥1,500 のところ、まとめてワンコイン ¥500</li></ul>
 
-          <div class="price-table" role="group" aria-label="価格プラン">
-            <div class="price-cell">
-              <span class="tier-label">梅 Lite</span>
-              <span class="tier-val">¥500</span>
-              <span class="tier-note">本体＋説明書</span>
-            </div>
-            <div class="price-cell price-standard">
-              <span class="tier-label">竹 Standard</span>
-              <span class="tier-val">¥980</span>
-              <span class="tier-note">収益化配信可</span>
-            </div>
-            <div class="price-cell">
-              <span class="tier-label">松 Pro</span>
-              <span class="tier-val">¥1,980</span>
-              <span class="tier-note">大型コラボ向け</span>
-            </div>
+          <div class="price-row">
+            <span class="price-num">¥500</span>
+            <span class="price-caption">有料単品6種（計¥1,500）＋無料3種の全9種入り・配信利用可</span>
           </div>
 
           <div class="entry-meta">
-            <span class="meta-qa"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.2 8.4l3 3.1 6.6-6.8"/></svg> QA Passed (errors=0, mcfunctions=4)</span>
-            <div class="file-spec"><code>earth-terrain-mc_v1.0.zip</code> / 11.3 KB / SHA256: <code>28021b9f0f</code></div>
+            <span class="meta-qa"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.2 8.4l3 3.1 6.6-6.8"/></svg> QA Passed (errors=0, mcfunctions=453)</span>
+            <div class="file-spec"><code>mega-bundle-9in1_v1.0.zip</code> / 254.7 KB / SHA256: <code>c6c7486487</code></div>
           </div>
 
           <div class="entry-actions">
@@ -1075,135 +853,19 @@
             <summary>収録コマンド・概要欄テンプレートを見る</summary>
             <div class="details-body">
               
-            <div class="spec-sub">
-              <div class="spec-sub-title">同梱ファンクション（一部）</div>
-              <ul class="cmd-list"><li><code>/function earth_terrain:build_terrain</code></li><li><code>/function earth_terrain:chunk_0</code></li><li><code>/function earth_terrain:chunk_1</code></li><li><code>/function earth_terrain:load</code></li></ul>
-            </div>
               <div class="spec-sub">
                 <div class="spec-sub-title">動画・配信の概要欄テンプレート</div>
-                <pre class="cta-pre" id="cta-earth-terrain-mc">▼ 動画で使用したデータパック『地球実測地形ジェネレーター（Earth Terrain MC）』
-配布ページ: https://abscly.github.io/swamp-mc-store/#earth-terrain-mc
+                <pre class="cta-pre" id="cta-mega-bundle-9in1">▼ 動画で使用したデータパック『マイクラ企画 9種コンプリートセット』(¥500)
+配布ページ: https://abscly.github.io/swamp-mc-store/#mega-bundle-9in1
 ※ Minecraft Java Edition 1.21.4 バニラ対応・収益化配信/動画利用可</pre>
-                <button type="button" class="btn-text-copy" data-copy-target="cta-earth-terrain-mc"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1"/><path d="M3 10.5V3.8A.8.8 0 0 1 3.8 3h6.7"/></svg> テキストをコピー</button>
+                <button type="button" class="btn-text-copy" data-copy-target="cta-mega-bundle-9in1"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1"/><path d="M3 10.5V3.8A.8.8 0 0 1 3.8 3h6.7"/></svg> テキストをコピー</button>
               </div>
             </div>
           </details>
         </article>
-        <article class="product-entry" id="mocap-pose-mc" data-category="映像・MV演出" data-accent="#eab308" data-search="モーションポーズ再生（mocap pose mc） mocap pose mc (armor stand keyframe animator) 滑らかなイージング補間で防具立てが踊る！勝利ダンス・モーション演出パック 映像・mv演出 mocap-pose-mc">
+        <article class="product-entry" id="voice-scream-mc" data-category="声量連動・リアクション" data-free="0" data-accent="#22c55e" data-search="声量連動ショックウェーブ（voice scream mc） voice scream mc (voice-driven shockwave &amp; bonus) 叫ぶほど衝撃波が広がりボーナスが降ってくる！配信者のリアクション連動データパック 声量連動・リアクション voice-scream-mc">
           <div class="entry-head">
-            <span class="entry-index">08</span>
-            <span class="entry-cat">映像・MV演出</span>
-            <span class="entry-ver">MC 1.21.4 · v1.0</span>
-          </div>
-          <h3 class="entry-title">モーションポーズ再生（Mocap Pose MC）</h3>
-          <p class="entry-subtitle">Mocap Pose MC (Armor Stand Keyframe Animator)</p>
-          <p class="entry-desc">滑らかなイージング補間で防具立てが踊る！勝利ダンス・モーション演出パック</p>
-          <ul class="feature-list"><li>20fps補間による滑らかな防具立てポーズアニメーション</li><li>パーティクル演出付きの『勝利ダンス』プリセットを収録</li><li>MV撮影・OP演出・勝利リザルト画面の演出に最適</li><li>Minecraft 1.21.4 完全準拠</li></ul>
-
-          <div class="price-table" role="group" aria-label="価格プラン">
-            <div class="price-cell">
-              <span class="tier-label">梅 Lite</span>
-              <span class="tier-val">¥500</span>
-              <span class="tier-note">本体＋説明書</span>
-            </div>
-            <div class="price-cell price-standard">
-              <span class="tier-label">竹 Standard</span>
-              <span class="tier-val">¥980</span>
-              <span class="tier-note">収益化配信可</span>
-            </div>
-            <div class="price-cell">
-              <span class="tier-label">松 Pro</span>
-              <span class="tier-val">¥1,980</span>
-              <span class="tier-note">大型コラボ向け</span>
-            </div>
-          </div>
-
-          <div class="entry-meta">
-            <span class="meta-qa"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.2 8.4l3 3.1 6.6-6.8"/></svg> QA Passed (errors=0, mcfunctions=43)</span>
-            <div class="file-spec"><code>mocap-pose-mc_v1.0.zip</code> / 18.1 KB / SHA256: <code>452c140a6d</code></div>
-          </div>
-
-          <div class="entry-actions">
-            <span class="btn btn-muted" aria-disabled="true">BOOTH 出品準備中</span>
-          </div>
-
-          <details class="entry-details">
-            <summary>収録コマンド・概要欄テンプレートを見る</summary>
-            <div class="details-body">
-              
-            <div class="spec-sub">
-              <div class="spec-sub-title">同梱ファンクション（一部）</div>
-              <ul class="cmd-list"><li><code>/function mocap_pose:cleanup</code></li><li><code>/function mocap_pose:frames/f_0000</code></li><li><code>/function mocap_pose:frames/f_0001</code></li><li><code>/function mocap_pose:frames/f_0002</code></li><li><code>/function mocap_pose:frames/f_0003</code></li><li><code>/function mocap_pose:frames/f_0004</code></li><li><code>/function mocap_pose:frames/f_0005</code></li><li><code>/function mocap_pose:frames/f_0006</code></li></ul>
-            </div>
-              <div class="spec-sub">
-                <div class="spec-sub-title">動画・配信の概要欄テンプレート</div>
-                <pre class="cta-pre" id="cta-mocap-pose-mc">▼ 動画で使用したデータパック『モーションポーズ再生（Mocap Pose MC）』
-配布ページ: https://abscly.github.io/swamp-mc-store/#mocap-pose-mc
-※ Minecraft Java Edition 1.21.4 バニラ対応・収益化配信/動画利用可</pre>
-                <button type="button" class="btn-text-copy" data-copy-target="cta-mocap-pose-mc"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1"/><path d="M3 10.5V3.8A.8.8 0 0 1 3.8 3h6.7"/></svg> テキストをコピー</button>
-              </div>
-            </div>
-          </details>
-        </article>
-        <article class="product-entry" id="viewer-reaction-mc" data-category="視聴者コメント連動" data-accent="#06b6d4" data-search="視聴者リアクション連動（viewer reaction mc） viewer reaction mc (live chat event trigger pack) 視聴者のコメント熱量で『ダイヤの雨』『ミニボス召喚』『祝福バフ』が発動！ 視聴者コメント連動 viewer-reaction-mc">
-          <div class="entry-head">
-            <span class="entry-index">09</span>
-            <span class="entry-cat">視聴者コメント連動</span>
-            <span class="entry-ver">MC 1.21.4 · v1.0</span>
-          </div>
-          <h3 class="entry-title">視聴者リアクション連動（Viewer Reaction MC）</h3>
-          <p class="entry-subtitle">Viewer Reaction MC (Live Chat Event Trigger Pack)</p>
-          <p class="entry-desc">視聴者のコメント熱量で『ダイヤの雨』『ミニボス召喚』『祝福バフ』が発動！</p>
-          <ul class="feature-list"><li>アクションバーゲージ表示で視聴者にも盛り上がり度を可視化</li><li>3大イベント（ダイヤの雨・ミニボス召喚・祝福バフ）を即座に発動</li><li>配信コメント連携や手動演出トリガーの両方に対応</li><li>Minecraft 1.21.4 完全対応</li></ul>
-
-          <div class="price-table" role="group" aria-label="価格プラン">
-            <div class="price-cell">
-              <span class="tier-label">梅 Lite</span>
-              <span class="tier-val">¥500</span>
-              <span class="tier-note">本体＋説明書</span>
-            </div>
-            <div class="price-cell price-standard">
-              <span class="tier-label">竹 Standard</span>
-              <span class="tier-val">¥1,000</span>
-              <span class="tier-note">収益化配信可</span>
-            </div>
-            <div class="price-cell">
-              <span class="tier-label">松 Pro</span>
-              <span class="tier-val">¥2,200</span>
-              <span class="tier-note">大型コラボ向け</span>
-            </div>
-          </div>
-
-          <div class="entry-meta">
-            <span class="meta-qa"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.2 8.4l3 3.1 6.6-6.8"/></svg> QA Passed (errors=0, mcfunctions=6)</span>
-            <div class="file-spec"><code>viewer-reaction-mc_v1.0.zip</code> / 9.3 KB / SHA256: <code>a9dc025262</code></div>
-          </div>
-
-          <div class="entry-actions">
-            <span class="btn btn-muted" aria-disabled="true">BOOTH 出品準備中</span>
-          </div>
-
-          <details class="entry-details">
-            <summary>収録コマンド・概要欄テンプレートを見る</summary>
-            <div class="details-body">
-              
-            <div class="spec-sub">
-              <div class="spec-sub-title">同梱ファンクション（一部）</div>
-              <ul class="cmd-list"><li><code>/function viewer_reaction:actionbar_gauge</code></li><li><code>/function viewer_reaction:event_blessing_buff</code></li><li><code>/function viewer_reaction:event_diamond_rain</code></li><li><code>/function viewer_reaction:event_mini_boss</code></li><li><code>/function viewer_reaction:load</code></li><li><code>/function viewer_reaction:tick</code></li></ul>
-            </div>
-              <div class="spec-sub">
-                <div class="spec-sub-title">動画・配信の概要欄テンプレート</div>
-                <pre class="cta-pre" id="cta-viewer-reaction-mc">▼ 動画で使用したデータパック『視聴者リアクション連動（Viewer Reaction MC）』
-配布ページ: https://abscly.github.io/swamp-mc-store/#viewer-reaction-mc
-※ Minecraft Java Edition 1.21.4 バニラ対応・収益化配信/動画利用可</pre>
-                <button type="button" class="btn-text-copy" data-copy-target="cta-viewer-reaction-mc"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1"/><path d="M3 10.5V3.8A.8.8 0 0 1 3.8 3h6.7"/></svg> テキストをコピー</button>
-              </div>
-            </div>
-          </details>
-        </article>
-        <article class="product-entry" id="voice-scream-mc" data-category="声量連動・リアクション" data-accent="#22c55e" data-search="声量連動ショックウェーブ（voice scream mc） voice scream mc (voice-driven shockwave &amp; bonus) 叫ぶほど衝撃波が広がりボーナスが降ってくる！配信者のリアクション連動データパック 声量連動・リアクション voice-scream-mc">
-          <div class="entry-head">
-            <span class="entry-index">10</span>
+            <span class="entry-index">05</span>
             <span class="entry-cat">声量連動・リアクション</span>
             <span class="entry-ver">MC 1.21.4 · v1.0</span>
           </div>
@@ -1212,27 +874,14 @@
           <p class="entry-desc">叫ぶほど衝撃波が広がりボーナスが降ってくる！配信者のリアクション連動データパック</p>
           <ul class="feature-list"><li>dBFS音量ティアに応じた衝撃波・ダイヤボーナス発動ファンクション</li><li>外部音声ブリッジやコマンド連携に対応した `bridge_inject` 搭載</li><li>絶叫ホラー企画や声出し禁止縛りにも応用可能</li><li>Minecraft 1.21.4 バニラ準拠</li></ul>
 
-          <div class="price-table" role="group" aria-label="価格プラン">
-            <div class="price-cell">
-              <span class="tier-label">梅 Lite</span>
-              <span class="tier-val">¥500</span>
-              <span class="tier-note">本体＋説明書</span>
-            </div>
-            <div class="price-cell price-standard">
-              <span class="tier-label">竹 Standard</span>
-              <span class="tier-val">¥980</span>
-              <span class="tier-note">収益化配信可</span>
-            </div>
-            <div class="price-cell">
-              <span class="tier-label">松 Pro</span>
-              <span class="tier-val">¥1,980</span>
-              <span class="tier-note">大型コラボ向け</span>
-            </div>
+          <div class="price-row">
+            <span class="price-num">¥200</span>
+            <span class="price-caption">買い切り・収益化配信および動画利用可</span>
           </div>
 
           <div class="entry-meta">
             <span class="meta-qa"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.2 8.4l3 3.1 6.6-6.8"/></svg> QA Passed (errors=0, mcfunctions=5)</span>
-            <div class="file-spec"><code>voice-scream-mc_v1.0.zip</code> / 9.0 KB / SHA256: <code>2ab5474e0f</code></div>
+            <div class="file-spec"><code>voice-scream-mc_v1.0.zip</code> / 8.7 KB / SHA256: <code>816b7530d1</code></div>
           </div>
 
           <div class="entry-actions">
@@ -1249,10 +898,225 @@
             </div>
               <div class="spec-sub">
                 <div class="spec-sub-title">動画・配信の概要欄テンプレート</div>
-                <pre class="cta-pre" id="cta-voice-scream-mc">▼ 動画で使用したデータパック『声量連動ショックウェーブ（Voice Scream MC）』
+                <pre class="cta-pre" id="cta-voice-scream-mc">▼ 動画で使用したデータパック『声量連動ショックウェーブ（Voice Scream MC）』(¥200)
 配布ページ: https://abscly.github.io/swamp-mc-store/#voice-scream-mc
 ※ Minecraft Java Edition 1.21.4 バニラ対応・収益化配信/動画利用可</pre>
                 <button type="button" class="btn-text-copy" data-copy-target="cta-voice-scream-mc"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1"/><path d="M3 10.5V3.8A.8.8 0 0 1 3.8 3h6.7"/></svg> テキストをコピー</button>
+              </div>
+            </div>
+          </details>
+        </article>
+        <article class="product-entry" id="miracle-director-mc" data-category="PvP・撮れ高演出" data-free="0" data-accent="#f59e0b" data-search="奇跡演出aiディレクター（miracle director） miracle director (dynamic dramatic pacing engine) 勝敗をギリギリまで接戦に導き、最高の撮れ高を自動演出するドラマ生成データパック pvp・撮れ高演出 miracle-director-mc">
+          <div class="entry-head">
+            <span class="entry-index">06</span>
+            <span class="entry-cat">PvP・撮れ高演出</span>
+            <span class="entry-ver">MC 1.21.4 · v1.0</span>
+          </div>
+          <h3 class="entry-title">奇跡演出AIディレクター（Miracle Director）</h3>
+          <p class="entry-subtitle">Miracle Director (Dynamic Dramatic Pacing Engine)</p>
+          <p class="entry-desc">勝敗をギリギリまで接戦に導き、最高の撮れ高を自動演出するドラマ生成データパック</p>
+          <ul class="feature-list"><li>スコア差を検知して劣勢側に逆転バフ・奇跡イベントを自動発動</li><li>接戦時は緊張感を高めるサウンド＆タイトル演出を自動トリガー</li><li>配信者・動画勢の『撮れ高不足』を解消する自動ドラマ構成</li><li>Minecraft 1.21.4 パックフォーマット61完全準拠</li></ul>
+
+          <div class="price-row">
+            <span class="price-num">¥200</span>
+            <span class="price-caption">買い切り・収益化配信および動画利用可</span>
+          </div>
+
+          <div class="entry-meta">
+            <span class="meta-qa"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.2 8.4l3 3.1 6.6-6.8"/></svg> QA Passed (errors=0, mcfunctions=7)</span>
+            <div class="file-spec"><code>miracle-director-mc_v1.0.zip</code> / 9.2 KB / SHA256: <code>58717973c2</code></div>
+          </div>
+
+          <div class="entry-actions">
+            <span class="btn btn-muted" aria-disabled="true">BOOTH 出品準備中</span>
+          </div>
+
+          <details class="entry-details">
+            <summary>収録コマンド・概要欄テンプレートを見る</summary>
+            <div class="details-body">
+              
+            <div class="spec-sub">
+              <div class="spec-sub-title">同梱ファンクション（一部）</div>
+              <ul class="cmd-list"><li><code>/function miracle_director:evaluate</code></li><li><code>/function miracle_director:load</code></li><li><code>/function miracle_director:reset</code></li><li><code>/function miracle_director:tick</code></li><li><code>/function miracle_director:trigger_climax</code></li><li><code>/function miracle_director:trigger_high</code></li><li><code>/function miracle_director:trigger_mild</code></li></ul>
+            </div>
+              <div class="spec-sub">
+                <div class="spec-sub-title">動画・配信の概要欄テンプレート</div>
+                <pre class="cta-pre" id="cta-miracle-director-mc">▼ 動画で使用したデータパック『奇跡演出AIディレクター（Miracle Director）』(¥200)
+配布ページ: https://abscly.github.io/swamp-mc-store/#miracle-director-mc
+※ Minecraft Java Edition 1.21.4 バニラ対応・収益化配信/動画利用可</pre>
+                <button type="button" class="btn-text-copy" data-copy-target="cta-miracle-director-mc"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1"/><path d="M3 10.5V3.8A.8.8 0 0 1 3.8 3h6.7"/></svg> テキストをコピー</button>
+              </div>
+            </div>
+          </details>
+        </article>
+        <article class="product-entry" id="viewer-reaction-mc" data-category="視聴者コメント連動" data-free="0" data-accent="#06b6d4" data-search="視聴者リアクション連動（viewer reaction mc） viewer reaction mc (live chat event trigger pack) 視聴者のコメント熱量で『ダイヤの雨』『ミニボス召喚』『祝福バフ』が発動！ 視聴者コメント連動 viewer-reaction-mc">
+          <div class="entry-head">
+            <span class="entry-index">07</span>
+            <span class="entry-cat">視聴者コメント連動</span>
+            <span class="entry-ver">MC 1.21.4 · v1.0</span>
+          </div>
+          <h3 class="entry-title">視聴者リアクション連動（Viewer Reaction MC）</h3>
+          <p class="entry-subtitle">Viewer Reaction MC (Live Chat Event Trigger Pack)</p>
+          <p class="entry-desc">視聴者のコメント熱量で『ダイヤの雨』『ミニボス召喚』『祝福バフ』が発動！</p>
+          <ul class="feature-list"><li>アクションバーゲージ表示で視聴者にも盛り上がり度を可視化</li><li>3大イベント（ダイヤの雨・ミニボス召喚・祝福バフ）を即座に発動</li><li>配信コメント連携や手動演出トリガーの両方に対応</li><li>Minecraft 1.21.4 完全対応</li></ul>
+
+          <div class="price-row">
+            <span class="price-num">¥200</span>
+            <span class="price-caption">買い切り・収益化配信および動画利用可</span>
+          </div>
+
+          <div class="entry-meta">
+            <span class="meta-qa"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.2 8.4l3 3.1 6.6-6.8"/></svg> QA Passed (errors=0, mcfunctions=6)</span>
+            <div class="file-spec"><code>viewer-reaction-mc_v1.0.zip</code> / 9.0 KB / SHA256: <code>61e1f60545</code></div>
+          </div>
+
+          <div class="entry-actions">
+            <span class="btn btn-muted" aria-disabled="true">BOOTH 出品準備中</span>
+          </div>
+
+          <details class="entry-details">
+            <summary>収録コマンド・概要欄テンプレートを見る</summary>
+            <div class="details-body">
+              
+            <div class="spec-sub">
+              <div class="spec-sub-title">同梱ファンクション（一部）</div>
+              <ul class="cmd-list"><li><code>/function viewer_reaction:actionbar_gauge</code></li><li><code>/function viewer_reaction:event_blessing_buff</code></li><li><code>/function viewer_reaction:event_diamond_rain</code></li><li><code>/function viewer_reaction:event_mini_boss</code></li><li><code>/function viewer_reaction:load</code></li><li><code>/function viewer_reaction:tick</code></li></ul>
+            </div>
+              <div class="spec-sub">
+                <div class="spec-sub-title">動画・配信の概要欄テンプレート</div>
+                <pre class="cta-pre" id="cta-viewer-reaction-mc">▼ 動画で使用したデータパック『視聴者リアクション連動（Viewer Reaction MC）』(¥200)
+配布ページ: https://abscly.github.io/swamp-mc-store/#viewer-reaction-mc
+※ Minecraft Java Edition 1.21.4 バニラ対応・収益化配信/動画利用可</pre>
+                <button type="button" class="btn-text-copy" data-copy-target="cta-viewer-reaction-mc"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1"/><path d="M3 10.5V3.8A.8.8 0 0 1 3.8 3h6.7"/></svg> テキストをコピー</button>
+              </div>
+            </div>
+          </details>
+        </article>
+        <article class="product-entry" id="earth-terrain-mc" data-category="建築・地形生成" data-free="1" data-accent="#10b981" data-search="地球実測地形ジェネレーター（earth terrain mc） earth terrain mc (real-world heightmap builder) 富士山などの実測dem標高データをワンコマンドでマイクラ世界に建築！ 建築・地形生成 earth-terrain-mc">
+          <div class="entry-head">
+            <span class="entry-index">08</span>
+            <span class="entry-cat">建築・地形生成</span>
+            <span class="entry-ver">MC 1.21.4 · v1.0</span>
+          </div>
+          <h3 class="entry-title">地球実測地形ジェネレーター（Earth Terrain MC）</h3>
+          <p class="entry-subtitle">Earth Terrain MC (Real-World Heightmap Builder)</p>
+          <p class="entry-desc">富士山などの実測DEM標高データをワンコマンドでマイクラ世界に建築！</p>
+          <ul class="feature-list"><li>標高に応じた自動バイオーム・ブロック配色（雪冠・岩肌・森林・水面）</li><li>`fill` コマンド最適化による高速地形生成</li><li>標準プリセット（富士山モデル）を即座に生成可能</li><li>建築勢・マップ制作者の時短に最適な 1.21.4 データパック</li></ul>
+
+          <div class="price-row">
+            <span class="price-num price-free">無料</span>
+            <span class="price-caption">無料お試し枠（BOOTH BOOST 歓迎）・配信利用可</span>
+          </div>
+
+          <div class="entry-meta">
+            <span class="meta-qa"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.2 8.4l3 3.1 6.6-6.8"/></svg> QA Passed (errors=0, mcfunctions=4)</span>
+            <div class="file-spec"><code>earth-terrain-mc_v1.0.zip</code> / 11.0 KB / SHA256: <code>bda5933ac4</code></div>
+          </div>
+
+          <div class="entry-actions">
+            <span class="btn btn-muted" aria-disabled="true">BOOTH 無料公開準備中</span>
+          </div>
+
+          <details class="entry-details">
+            <summary>収録コマンド・概要欄テンプレートを見る</summary>
+            <div class="details-body">
+              
+            <div class="spec-sub">
+              <div class="spec-sub-title">同梱ファンクション（一部）</div>
+              <ul class="cmd-list"><li><code>/function earth_terrain:build_terrain</code></li><li><code>/function earth_terrain:chunk_0</code></li><li><code>/function earth_terrain:chunk_1</code></li><li><code>/function earth_terrain:load</code></li></ul>
+            </div>
+              <div class="spec-sub">
+                <div class="spec-sub-title">動画・配信の概要欄テンプレート</div>
+                <pre class="cta-pre" id="cta-earth-terrain-mc">▼ 動画で使用したデータパック『地球実測地形ジェネレーター（Earth Terrain MC）』(無料 (¥0))
+配布ページ: https://abscly.github.io/swamp-mc-store/#earth-terrain-mc
+※ Minecraft Java Edition 1.21.4 バニラ対応・収益化配信/動画利用可</pre>
+                <button type="button" class="btn-text-copy" data-copy-target="cta-earth-terrain-mc"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1"/><path d="M3 10.5V3.8A.8.8 0 0 1 3.8 3h6.7"/></svg> テキストをコピー</button>
+              </div>
+            </div>
+          </details>
+        </article>
+        <article class="product-entry" id="mocap-pose-mc" data-category="映像・MV演出" data-free="1" data-accent="#eab308" data-search="モーションポーズ再生（mocap pose mc） mocap pose mc (armor stand keyframe animator) 滑らかなイージング補間で防具立てが踊る！勝利ダンス・モーション演出パック 映像・mv演出 mocap-pose-mc">
+          <div class="entry-head">
+            <span class="entry-index">09</span>
+            <span class="entry-cat">映像・MV演出</span>
+            <span class="entry-ver">MC 1.21.4 · v1.0</span>
+          </div>
+          <h3 class="entry-title">モーションポーズ再生（Mocap Pose MC）</h3>
+          <p class="entry-subtitle">Mocap Pose MC (Armor Stand Keyframe Animator)</p>
+          <p class="entry-desc">滑らかなイージング補間で防具立てが踊る！勝利ダンス・モーション演出パック</p>
+          <ul class="feature-list"><li>20fps補間による滑らかな防具立てポーズアニメーション</li><li>パーティクル演出付きの『勝利ダンス』プリセットを収録</li><li>MV撮影・OP演出・勝利リザルト画面の演出に最適</li><li>Minecraft 1.21.4 完全準拠</li></ul>
+
+          <div class="price-row">
+            <span class="price-num price-free">無料</span>
+            <span class="price-caption">無料お試し枠（BOOTH BOOST 歓迎）・配信利用可</span>
+          </div>
+
+          <div class="entry-meta">
+            <span class="meta-qa"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.2 8.4l3 3.1 6.6-6.8"/></svg> QA Passed (errors=0, mcfunctions=43)</span>
+            <div class="file-spec"><code>mocap-pose-mc_v1.0.zip</code> / 17.8 KB / SHA256: <code>27ca202e9b</code></div>
+          </div>
+
+          <div class="entry-actions">
+            <span class="btn btn-muted" aria-disabled="true">BOOTH 無料公開準備中</span>
+          </div>
+
+          <details class="entry-details">
+            <summary>収録コマンド・概要欄テンプレートを見る</summary>
+            <div class="details-body">
+              
+            <div class="spec-sub">
+              <div class="spec-sub-title">同梱ファンクション（一部）</div>
+              <ul class="cmd-list"><li><code>/function mocap_pose:cleanup</code></li><li><code>/function mocap_pose:frames/f_0000</code></li><li><code>/function mocap_pose:frames/f_0001</code></li><li><code>/function mocap_pose:frames/f_0002</code></li><li><code>/function mocap_pose:frames/f_0003</code></li><li><code>/function mocap_pose:frames/f_0004</code></li><li><code>/function mocap_pose:frames/f_0005</code></li><li><code>/function mocap_pose:frames/f_0006</code></li></ul>
+            </div>
+              <div class="spec-sub">
+                <div class="spec-sub-title">動画・配信の概要欄テンプレート</div>
+                <pre class="cta-pre" id="cta-mocap-pose-mc">▼ 動画で使用したデータパック『モーションポーズ再生（Mocap Pose MC）』(無料 (¥0))
+配布ページ: https://abscly.github.io/swamp-mc-store/#mocap-pose-mc
+※ Minecraft Java Edition 1.21.4 バニラ対応・収益化配信/動画利用可</pre>
+                <button type="button" class="btn-text-copy" data-copy-target="cta-mocap-pose-mc"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1"/><path d="M3 10.5V3.8A.8.8 0 0 1 3.8 3h6.7"/></svg> テキストをコピー</button>
+              </div>
+            </div>
+          </details>
+        </article>
+        <article class="product-entry" id="ingame-os-mc" data-category="ミニゲーム・実験作" data-free="1" data-accent="#38bdf8" data-search="マイクラ内osハック（株・カジノ・ミニゲームui） in-game os hack (stocks, casino &amp; mini-games ui) チャット欄がデスクトップosに！株価・スロット・ルーレットをマイクラ内で完結 ミニゲーム・実験作 ingame-os-mc">
+          <div class="entry-head">
+            <span class="entry-index">10</span>
+            <span class="entry-cat">ミニゲーム・実験作</span>
+            <span class="entry-ver">MC 1.21.4 · v1.0</span>
+          </div>
+          <h3 class="entry-title">マイクラ内OSハック（株・カジノ・ミニゲームUI）</h3>
+          <p class="entry-subtitle">In-Game OS Hack (Stocks, Casino &amp; Mini-Games UI)</p>
+          <p class="entry-desc">チャット欄がデスクトップOSに！株価・スロット・ルーレットをマイクラ内で完結</p>
+          <ul class="feature-list"><li>チャットクリックUIで動作する仮想OSデスクトップメニュー</li><li>リアルタイム変動する仮想株価マーケット＆売買システム</li><li>演出付きスロット＆ハイローカジノミニゲーム</li><li>バニラ1.21.4完全対応（MOD不要・データパック単体動作）</li></ul>
+
+          <div class="price-row">
+            <span class="price-num price-free">無料</span>
+            <span class="price-caption">無料お試し枠（BOOTH BOOST 歓迎）・配信利用可</span>
+          </div>
+
+          <div class="entry-meta">
+            <span class="meta-qa"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.2 8.4l3 3.1 6.6-6.8"/></svg> QA Passed (errors=0, mcfunctions=20)</span>
+            <div class="file-spec"><code>ingame-os-mc_v1.0.zip</code> / 15.0 KB / SHA256: <code>cb2d5f0a51</code></div>
+          </div>
+
+          <div class="entry-actions">
+            <span class="btn btn-muted" aria-disabled="true">BOOTH 無料公開準備中</span>
+          </div>
+
+          <details class="entry-details">
+            <summary>収録コマンド・概要欄テンプレートを見る</summary>
+            <div class="details-body">
+              
+            <div class="spec-sub">
+              <div class="spec-sub-title">同梱ファンクション（一部）</div>
+              <ul class="cmd-list"><li><code>/function ingame_os:daily_bonus</code></li><li><code>/function ingame_os:init_player</code></li><li><code>/function ingame_os:load</code></li><li><code>/function ingame_os:menu</code></li><li><code>/function ingame_os:open_os</code></li><li><code>/function ingame_os:slot/execute_spin</code></li><li><code>/function ingame_os:slot/judge</code></li><li><code>/function ingame_os:slot/open</code></li></ul>
+            </div>
+              <div class="spec-sub">
+                <div class="spec-sub-title">動画・配信の概要欄テンプレート</div>
+                <pre class="cta-pre" id="cta-ingame-os-mc">▼ 動画で使用したデータパック『マイクラ内OSハック（株・カジノ・ミニゲームUI）』(無料 (¥0))
+配布ページ: https://abscly.github.io/swamp-mc-store/#ingame-os-mc
+※ Minecraft Java Edition 1.21.4 バニラ対応・収益化配信/動画利用可</pre>
+                <button type="button" class="btn-text-copy" data-copy-target="cta-ingame-os-mc"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1"/><path d="M3 10.5V3.8A.8.8 0 0 1 3.8 3h6.7"/></svg> テキストをコピー</button>
               </div>
             </div>
           </details>
@@ -1292,7 +1156,7 @@
         <div class="license-col">
           <h3>許可されている利用</h3>
           <ul>
-            <li>購入者ご本人のシングルプレイ、および購入者が主催するマルチプレイサーバーでの利用</li>
+            <li>購入・入手したご本人のシングルプレイ、および主催するマルチプレイサーバーでの利用</li>
             <li>YouTube・Twitch・ニコニコ動画・TikTok 等のライブ配信や収益化動画での利用（クレジット表記は任意）</li>
             <li>企画内容に合わせたパラメータ調整や軽微な改変</li>
           </ul>
@@ -1310,13 +1174,13 @@
       <details class="creator-tools">
         <summary>配信・動画の概要欄用まとめテンプレートを開く</summary>
         <div class="details-body">
-          <pre class="cta-pre" id="store-cta-all">▼ swamp マイクラ企画工房（マイクラ1.21.4 データパック配布）
+          <pre class="cta-pre" id="store-cta-all">▼ swamp マイクラ企画工房（マイクラ1.21.4 データパック配布 / 無料〜¥500）
 https://abscly.github.io/swamp-mc-store
-・マイクラ内OSハック（株・カジノ・ミニゲームUI） (¥500〜) https://abscly.github.io/swamp-mc-store/#ingame-os-mc
-・視線ハック・ギミック（Gaze Hack） (¥500〜) https://abscly.github.io/swamp-mc-store/#gaze-hack-mc
-・マイクラ企画 9種コンプリートセット (¥2,980〜) https://abscly.github.io/swamp-mc-store/#mega-bundle-9in1
-・奇跡演出AIディレクター（Miracle Director） (¥600〜) https://abscly.github.io/swamp-mc-store/#miracle-director-mc
-・人狼インフレーション（Werewolf Inflation） (¥600〜) https://abscly.github.io/swamp-mc-store/#werewolf-inflation-mc</pre>
+・視線ハック・ギミック（Gaze Hack） (¥300) https://abscly.github.io/swamp-mc-store/#gaze-hack-mc
+・人狼インフレーション（Werewolf Inflation） (¥300) https://abscly.github.io/swamp-mc-store/#werewolf-inflation-mc
+・AIドッペルゲンガー対決（Doppelganger Ghost） (¥300) https://abscly.github.io/swamp-mc-store/#doppelganger-mc
+・マイクラ企画 9種コンプリートセット (¥500) https://abscly.github.io/swamp-mc-store/#mega-bundle-9in1
+・声量連動ショックウェーブ（Voice Scream MC） (¥200) https://abscly.github.io/swamp-mc-store/#voice-scream-mc</pre>
           <button type="button" class="btn-text-copy" data-copy-target="store-cta-all"><svg class="ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="5.5" width="7.5" height="7.5" rx="1"/><path d="M3 10.5V3.8A.8.8 0 0 1 3.8 3h6.7"/></svg> まとめテキストをコピー</button>
         </div>
       </details>
@@ -1342,8 +1206,9 @@ https://abscly.github.io/swamp-mc-store
         var visible = 0;
         cards.forEach(function (card) {
           var cat = card.getAttribute("data-category") || "";
+          var isFree = card.getAttribute("data-free") === "1";
           var hay = card.getAttribute("data-search") || "";
-          var matchCat = (activeCat === "all") || (cat === activeCat);
+          var matchCat = (activeCat === "all") || (activeCat === "__free__" ? isFree : cat === activeCat);
           var matchQ = (!q) || (hay.indexOf(q) !== -1);
           var show = matchCat && matchQ;
           card.classList.toggle("hidden", !show);
@@ -1379,181 +1244,242 @@ https://abscly.github.io/swamp-mc-store
         });
       });
 
-      /* --- Interactive In-Game OS Preview (faithful to ingame-os-mc_v1.0.zip) --- */
-      var logEl = document.getElementById("mcChatLog");
-      if (!logEl) return;
+      /* --- Interactive Gaze Hack Raycast Simulator --- */
+      var canvas = document.getElementById("gazeCanvas");
+      if (!canvas || !canvas.getContext) return;
+      var ctx = canvas.getContext("2d");
+      var statusEl = document.getElementById("gazeStatusText");
+      var statMonoEl = document.getElementById("gazeStatMono");
+      var modeBtns = document.querySelectorAll(".gaze-mode-btn");
+      var resetBtn = document.getElementById("gazeResetBtn");
 
-      var state = { cash: 1000, shares: 0, price: 100, diff: 0 };
-      var reels = ["[CHERRY]", "[LEMON]", "[BELL]", "[MELON]", "[STAR]", "[DIAMOND]", "[7]"];
+      var W = canvas.width;
+      var H = canvas.height;
+      var mode = "weeping";
+      var player = { x: 140, y: 165, angle: 0 };
+      var enemy = { x: 455, y: 155, angle: Math.PI };
+      var wall = { x: 285, y: 205, w: 32, h: 78 };
+      var swapCd = 0;
+      var swapFlash = 0;
+      var swapCount = 0;
+      var caughtNotice = 0;
 
-      function appendLine(nodes) {
-        var div = document.createElement("div");
-        div.className = "mc-line";
-        nodes.forEach(function (n) {
-          if (typeof n === "string") {
-            div.appendChild(document.createTextNode(n));
-          } else if (n.btn) {
-            var b = document.createElement("button");
-            b.type = "button";
-            b.className = "mc-cmd-btn " + (n.cls || "");
-            b.textContent = n.btn;
-            b.addEventListener("click", n.onClick);
-            div.appendChild(b);
-          } else {
-            var sp = document.createElement("span");
-            sp.className = n.cls || "";
-            sp.textContent = n.text;
-            div.appendChild(sp);
-          }
+      function resetEntities() {
+        player.x = 140; player.y = 165; player.angle = 0;
+        enemy.x = 455; enemy.y = 155; enemy.angle = Math.PI;
+        swapCd = 0; swapFlash = 0; caughtNotice = 0;
+      }
+
+      function angleDiff(a, b) {
+        var d = a - b;
+        while (d > Math.PI) d -= Math.PI * 2;
+        while (d < -Math.PI) d += Math.PI * 2;
+        return Math.abs(d);
+      }
+
+      function segIntersectsRect(x1, y1, x2, y2, r) {
+        var steps = 28;
+        for (var i = 1; i < steps; i++) {
+          var t = i / steps;
+          var px = x1 + (x2 - x1) * t;
+          var py = y1 + (y2 - y1) * t;
+          if (px >= r.x && px <= r.x + r.w && py >= r.y && py <= r.y + r.h) return true;
+        }
+        return false;
+      }
+
+      function isLookingAt(src, dst, halfCone) {
+        var targetAng = Math.atan2(dst.y - src.y, dst.x - src.x);
+        if (angleDiff(src.angle, targetAng) > halfCone) return false;
+        return !segIntersectsRect(src.x, src.y, dst.x, dst.y, wall);
+      }
+
+      function pointFromEvent(ev) {
+        var rect = canvas.getBoundingClientRect();
+        var clientX = ev.touches ? ev.touches[0].clientX : ev.clientX;
+        var clientY = ev.touches ? ev.touches[0].clientY : ev.clientY;
+        var mx = (clientX - rect.left) * (W / rect.width);
+        var my = (clientY - rect.top) * (H / rect.height);
+        player.angle = Math.atan2(my - player.y, mx - player.x);
+      }
+
+      canvas.addEventListener("mousemove", pointFromEvent);
+      canvas.addEventListener("touchstart", function (e) { pointFromEvent(e); }, { passive: true });
+      canvas.addEventListener("touchmove", function (e) { pointFromEvent(e); }, { passive: true });
+
+      modeBtns.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          modeBtns.forEach(function (b) { b.classList.remove("active"); });
+          btn.classList.add("active");
+          mode = btn.getAttribute("data-gaze-mode") || "weeping";
+          resetEntities();
         });
-        logEl.appendChild(div);
-        logEl.scrollTop = logEl.scrollHeight;
+      });
+      if (resetBtn) resetBtn.addEventListener("click", resetEntities);
+
+      function drawCone(x, y, ang, len, halfCone, fill, stroke) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.arc(x, y, len, ang - halfCone, ang + halfCone);
+        ctx.closePath();
+        ctx.fillStyle = fill;
+        ctx.fill();
+        ctx.strokeStyle = stroke;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.restore();
       }
 
-      function openHome() {
-        appendLine([{ text: "==========================================", cls: "mc-hr-aqua" }]);
-        appendLine([
-          { text: " [MineOS v1.21] ", cls: "mc-aqua" },
-          { text: "所持金: ", cls: "mc-muted" },
-          { text: state.cash + "G", cls: "mc-gold" },
-          { text: "  |  現在株価: ", cls: "mc-muted" },
-          { text: state.price + "G", cls: "mc-aqua" }
-        ]);
-        appendLine([{ text: "------------------------------------------", cls: "mc-hr-dim" }]);
-        appendLine([
-          " アプリ: ",
-          { btn: "[ダイヤ株取引]", cls: "b-aqua", onClick: openStock },
-          { btn: "[3リールスロット]", cls: "b-gold", onClick: openSlot },
-          { btn: "[給付金 +500G]", cls: "b-green", onClick: dailyBonus }
-        ]);
-        appendLine([{ text: "==========================================", cls: "mc-hr-aqua" }]);
-      }
+      var lastTs = performance.now();
+      function frame(now) {
+        var dt = Math.min(0.05, (now - lastTs) / 1000);
+        lastTs = now;
 
-      function openStock() {
-        var val = state.shares * state.price;
-        var sign = state.diff > 0 ? "+" : "";
-        appendLine([{ text: "======== [ リアルタイムダイヤ株取引 ] ========", cls: "mc-hr-aqua" }]);
-        appendLine([
-          { text: " 株価: ", cls: "mc-muted" }, { text: state.price + "G", cls: "mc-aqua" },
-          { text: " (前回比 " + sign + state.diff + "G)  |  保有: ", cls: "mc-muted" },
-          { text: state.shares + "株", cls: "mc-gold" },
-          { text: " / 評価額 ", cls: "mc-muted" }, { text: val + "G", cls: "mc-green" }
-        ]);
-        appendLine([
-          " 注文: ",
-          { btn: "[+1株 買い]", cls: "b-green", onClick: function () { buyStock(1); } },
-          { btn: "[+5株 買い]", cls: "b-green", onClick: function () { buyStock(5); } },
-          { btn: "[-1株 売り]", cls: "b-red", onClick: sellOne },
-          { btn: "[全売却]", cls: "b-red", onClick: sellAll }
-        ]);
-        appendLine([
-          " 操作: ",
-          { btn: "[市場更新]", cls: "b-aqua", onClick: fluctuate },
-          { btn: "[OSホーム]", cls: "", onClick: openHome }
-        ]);
-      }
+        var playerSeesEnemy = isLookingAt(player, enemy, 0.34);
+        var enemySeesPlayer = false;
 
-      function buyStock(n) {
-        var cost = state.price * n;
-        if (state.cash < cost) {
-          appendLine([{ text: " [MineOS] 所持金が足りません（必要: " + cost + "G / 所持: " + state.cash + "G）", cls: "mc-red" }]);
-          return;
+        if (mode === "weeping") {
+          if (!playerSeesEnemy) {
+            var dx = player.x - enemy.x;
+            var dy = player.y - enemy.y;
+            var dist = Math.hypot(dx, dy);
+            if (dist > 34) {
+              var spd = 72;
+              var nx = enemy.x + (dx / dist) * spd * dt;
+              var ny = enemy.y + (dy / dist) * spd * dt;
+              if (!(nx > wall.x - 14 && nx < wall.x + wall.w + 14 && ny > wall.y - 14 && ny < wall.y + wall.h + 14)) {
+                enemy.x = nx; enemy.y = ny;
+              } else {
+                enemy.y -= 55 * dt;
+              }
+            } else {
+              caughtNotice = 1.4;
+              enemy.x = 465; enemy.y = 145;
+            }
+          }
+          if (caughtNotice > 0) caughtNotice = Math.max(0, caughtNotice - dt);
+        } else {
+          enemy.angle = Math.atan2(player.y - enemy.y, player.x - enemy.x) + Math.sin(now * 0.0014) * 1.15;
+          enemySeesPlayer = isLookingAt(enemy, player, 0.34);
+          if (swapCd > 0) swapCd = Math.max(0, swapCd - dt);
+          if (swapFlash > 0) swapFlash = Math.max(0, swapFlash - dt);
+          if (playerSeesEnemy && enemySeesPlayer && swapCd <= 0) {
+            var tx = player.x, ty = player.y;
+            player.x = enemy.x; player.y = enemy.y;
+            enemy.x = tx; enemy.y = ty;
+            player.angle = Math.atan2(enemy.y - player.y, enemy.x - player.x);
+            swapCd = 2.0;
+            swapFlash = 0.45;
+            swapCount += 1;
+          }
         }
-        state.cash -= cost;
-        state.shares += n;
-        appendLine([{ text: " [約定] ダイヤ株を " + n + "株 購入しました（-" + cost + "G / 残高 " + state.cash + "G）", cls: "mc-green" }]);
-        openStock();
-      }
 
-      function sellOne() {
-        if (state.shares < 1) {
-          appendLine([{ text: " [MineOS] 売却できる保有株がありません。", cls: "mc-red" }]);
-          return;
+        /* Draw paper grid */
+        ctx.clearRect(0, 0, W, H);
+        ctx.fillStyle = "#fbfaf7";
+        ctx.fillRect(0, 0, W, H);
+        ctx.strokeStyle = "#ece7dc";
+        ctx.lineWidth = 1;
+        for (var gx = 40; gx < W; gx += 40) {
+          ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, H); ctx.stroke();
         }
-        state.shares -= 1;
-        state.cash += state.price;
-        appendLine([{ text: " [約定] ダイヤ株を 1株 売却しました（+" + state.price + "G / 残高 " + state.cash + "G）", cls: "mc-gold" }]);
-        openStock();
-      }
-
-      function sellAll() {
-        if (state.shares < 1) {
-          appendLine([{ text: " [MineOS] 保有株はありません。", cls: "mc-red" }]);
-          return;
+        for (var gy = 40; gy < H; gy += 40) {
+          ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(W, gy); ctx.stroke();
         }
-        var gain = state.shares * state.price;
-        var sold = state.shares;
-        state.shares = 0;
-        state.cash += gain;
-        appendLine([{ text: " [全売却] " + sold + "株を売却（+" + gain + "G / 残高 " + state.cash + "G）", cls: "mc-gold" }]);
-        openStock();
-      }
 
-      function fluctuate() {
-        var delta = Math.floor(Math.random() * 61) - 30;
-        var next = Math.max(10, Math.min(500, state.price + delta));
-        state.diff = next - state.price;
-        state.price = next;
-        openStock();
-      }
+        /* Draw wall obstacle */
+        ctx.fillStyle = "#d8d1c4";
+        ctx.fillRect(wall.x, wall.y, wall.w, wall.h);
+        ctx.strokeStyle = "#9d9587";
+        ctx.strokeRect(wall.x, wall.y, wall.w, wall.h);
+        ctx.fillStyle = "#6c665c";
+        ctx.font = "11px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("壁", wall.x + wall.w / 2, wall.y + wall.h / 2 + 4);
 
-      function openSlot() {
-        appendLine([{ text: "======== [ 3リール・スロットマシン ] ========", cls: "mc-hr-gold" }]);
-        appendLine([
-          { text: " 所持金: ", cls: "mc-muted" }, { text: state.cash + "G", cls: "mc-gold" },
-          { text: "  |  [7]x3=20倍 / [DIAMOND]x3=10倍 / 3揃=5倍 / 2揃=2倍", cls: "mc-muted" }
-        ]);
-        appendLine([
-          " 賭け: ",
-          { btn: "[SPIN 100G]", cls: "b-green", onClick: function () { spinSlot(100); } },
-          { btn: "[HIGH BET 500G]", cls: "b-gold", onClick: function () { spinSlot(500); } },
-          { btn: "[OSホーム]", cls: "", onClick: openHome }
-        ]);
-      }
-
-      function spinSlot(bet) {
-        if (state.cash < bet) {
-          appendLine([{ text: " [Slot] 所持金が足りません（必要: " + bet + "G）", cls: "mc-red" }]);
-          return;
+        /* Draw vision cones */
+        drawCone(
+          player.x, player.y, player.angle, 220, 0.34,
+          playerSeesEnemy ? "rgba(30, 58, 95, 0.16)" : "rgba(30, 58, 95, 0.08)",
+          "rgba(30, 58, 95, 0.35)"
+        );
+        if (mode === "swap") {
+          drawCone(
+            enemy.x, enemy.y, enemy.angle, 220, 0.34,
+            enemySeesPlayer ? "rgba(159, 45, 45, 0.16)" : "rgba(159, 45, 45, 0.08)",
+            "rgba(159, 45, 45, 0.35)"
+          );
         }
-        state.cash -= bet;
-        var r1 = Math.floor(Math.random() * 7);
-        var r2 = Math.floor(Math.random() * 7);
-        var r3 = Math.floor(Math.random() * 7);
-        var mult = 0;
-        if (r1 === r2 && r2 === r3) {
-          mult = (r1 === 6) ? 20 : (r1 === 5 ? 10 : 5);
-        } else if (r1 === r2 || r2 === r3 || r1 === r3) {
-          mult = 2;
+
+        /* Swap flash connector */
+        if (swapFlash > 0) {
+          ctx.save();
+          ctx.setLineDash([5, 4]);
+          ctx.strokeStyle = "#1e3a5f";
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(player.x, player.y);
+          ctx.lineTo(enemy.x, enemy.y);
+          ctx.stroke();
+          ctx.restore();
         }
-        var payout = bet * mult;
-        state.cash += payout;
-        appendLine([
-          { text: " 結果: ", cls: "mc-muted" },
-          { text: reels[r1] + " " + reels[r2] + " " + reels[r3], cls: mult > 0 ? "mc-gold" : "mc-muted" },
-          { text: mult > 0 ? ("  → " + mult + "倍的中！ +" + payout + "G（残高 " + state.cash + "G）") : ("  → ハズレ（残高 " + state.cash + "G）"), cls: mult > 0 ? "mc-green" : "mc-red" }
-        ]);
-        openSlot();
-      }
 
-      function dailyBonus() {
-        state.cash += 500;
-        appendLine([{ text: " [給付金] +500G を受け取りました（残高 " + state.cash + "G）", cls: "mc-green" }]);
-        openHome();
-      }
+        /* Draw Player */
+        ctx.beginPath();
+        ctx.arc(player.x, player.y, 14, 0, Math.PI * 2);
+        ctx.fillStyle = "#1e3a5f";
+        ctx.fill();
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 11px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("自分", player.x, player.y + 4);
 
-      function initDemo() {
-        state = { cash: 1000, shares: 0, price: 100, diff: 0 };
-        logEl.innerHTML = "";
-        appendLine([{ text: "[In-Game OS] システム起動完了（/reload 実行時メッセージ再現）", cls: "mc-aqua" }]);
-        openHome();
-      }
+        /* Draw Target (Creeper or Rival Player) */
+        ctx.beginPath();
+        ctx.arc(enemy.x, enemy.y, 14, 0, Math.PI * 2);
+        ctx.fillStyle = mode === "weeping" ? (playerSeesEnemy ? "#6c7a72" : "#1f513f") : "#9f2d2d";
+        ctx.fill();
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 11px sans-serif";
+        ctx.fillText(mode === "weeping" ? "敵" : "相手", enemy.x, enemy.y + 4);
 
-      var resetBtn = document.getElementById("demoResetBtn");
-      var openBtn = document.getElementById("demoOpenOsBtn");
-      if (resetBtn) resetBtn.addEventListener("click", initDemo);
-      if (openBtn) openBtn.addEventListener("click", openHome);
-      initDemo();
+        /* Labels above target */
+        ctx.fillStyle = "#181816";
+        ctx.font = "12px sans-serif";
+        if (mode === "weeping") {
+          ctx.fillText(playerSeesEnemy ? "硬直中" : "接近中", enemy.x, enemy.y - 21);
+        } else {
+          ctx.fillText(swapFlash > 0 ? "位置入替!" : (swapCd > 0 ? "CD " + swapCd.toFixed(1) + "s" : "視線探索中"), enemy.x, enemy.y - 21);
+        }
+
+        if (statusEl && statMonoEl) {
+          if (mode === "weeping") {
+            if (caughtNotice > 0) {
+              statusEl.textContent = "目を逸らしている間に接近されました（位置を自動リセット）。";
+              statMonoEl.textContent = "状態: 接近リセット";
+            } else if (playerSeesEnemy) {
+              statusEl.textContent = "視線が合っている間は対象が完全に硬直します。";
+              statMonoEl.textContent = "状態: 硬直中";
+            } else {
+              statusEl.textContent = "目を逸らすと背後に迫ってきます。視線を戻して止めてください。";
+              statMonoEl.textContent = "状態: 接近中";
+            }
+          } else {
+            if (swapFlash > 0) {
+              statusEl.textContent = "お互いの視線が交差！座標が即座に入れ替わりました。";
+            } else if (swapCd > 0) {
+              statusEl.textContent = "入れ替わり直後のクールダウン中です。";
+            } else {
+              statusEl.textContent = "相手がこちらを向いた瞬間に視線を合わせると位置が入れ替わります。";
+            }
+            statMonoEl.textContent = "入替回数: " + swapCount + "回";
+          }
+        }
+
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
     })();
   </script>
 </body>
